@@ -17,7 +17,7 @@ class MiddlewareGroupTest extends \PHPUnit_Framework_TestCase
     {
         // First will add the word "foo" to the start of a string, and remove it if it's there
         /** @var MiddlewareInterface|Mock $first */
-        $first = \Mockery::mock("Lexide\\QueueBall\\Sqs\\Middleware\\MiddlewareInterface");
+        $first = \Mockery::mock(MiddlewareInterface::class);
         $first->shouldReceive("request")->andReturnUsing(function ($body) {
             return "foo " . $body;
         });
@@ -31,7 +31,7 @@ class MiddlewareGroupTest extends \PHPUnit_Framework_TestCase
 
         // Second will add the word "bar" to the start of a string, and remove it if it's there
         /** @var MiddlewareInterface|Mock $second */
-        $second = \Mockery::mock("Lexide\\QueueBall\\Sqs\\Middleware\\MiddlewareInterface");
+        $second = \Mockery::mock(MiddlewareInterface::class);
         $second->shouldReceive("request")->andReturnUsing(function ($body) {
             return "bar " . $body;
         });

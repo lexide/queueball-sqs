@@ -4,7 +4,7 @@
   "license": "MIT",
   "homepage": "https://github.com/lexide/queueball-sqs",
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5.0",
     "aws/aws-sdk-php": "3.*",
     "lexide/queueball": "^3.0.0"
   },
