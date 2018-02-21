@@ -20,7 +20,7 @@
     }
   },
   "extra": {
-    "downsider-puzzle-di": {
+    "lexide/puzzle-di": {
       "lexide/syringe": {
         "path": "config/syringe.yml"
       }
