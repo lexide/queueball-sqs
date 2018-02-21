@@ -1,16 +1,10 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Test\Middleware;
+namespace Lexide\QueueBall\Sqs\Test\Middleware;
 
-use Aws\Result;
-use Aws\S3\S3Client;
-use GuzzleHttp\Psr7\Stream;
-use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
-use Silktide\QueueBall\Sqs\Middleware\JsonMiddleware;
-use Silktide\QueueBall\Sqs\Middleware\LargeFileMiddleware;
+use Lexide\QueueBall\Sqs\Middleware\JsonMiddleware;
 
-class JsonMiddlewareTest extends TestCase
+class JsonMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var JsonMiddleware
@@ -38,9 +32,11 @@ class JsonMiddlewareTest extends TestCase
         );
     }
 
+    /**
+     * @expectedException \Exception
+     */
     public function testInvalidResponse()
     {
-        $this->expectException(\Exception::class);
         $this->jsonMiddleware->response('{"This is an invalid JSON string"}');
     }
 }

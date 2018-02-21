@@ -1,6 +1,6 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Middleware;
+namespace Lexide\QueueBall\Sqs\Middleware;
 
 interface MiddlewareInterface
 {

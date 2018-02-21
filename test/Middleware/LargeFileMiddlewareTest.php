@@ -1,15 +1,14 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Test\Middleware;
+namespace Lexide\QueueBall\Sqs\Test\Middleware;
 
 use Aws\Result;
 use Aws\S3\S3Client;
 use GuzzleHttp\Psr7\Stream;
 use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
-use Silktide\QueueBall\Sqs\Middleware\LargeFileMiddleware;
+use Lexide\QueueBall\Sqs\Middleware\LargeFileMiddleware;
 
-class LargeFileMiddlewareTest extends TestCase
+class LargeFileMiddlewareTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var MockInterface

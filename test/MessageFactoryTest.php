@@ -1,16 +1,13 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Test;
+namespace Lexide\QueueBall\Sqs\Test;
 
-use PHPUnit\Framework\TestCase;
-use Silktide\QueueBall\Exception\QueueException;
-use Silktide\QueueBall\Message\QueueMessage;
-use Silktide\QueueBall\Sqs\MessageFactory;
-use Silktide\QueueBall\Sqs\Middleware\JsonMiddleware;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareGroup;
+use Lexide\QueueBall\Exception\QueueException;
+use Lexide\QueueBall\Message\QueueMessage;
+use Lexide\QueueBall\Sqs\MessageFactory;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareGroup;
 
-
-class MessageFactoryTest extends TestCase
+class MessageFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testExceptions()
     {
@@ -134,4 +131,3 @@ class MessageFactoryTest extends TestCase
     }
 
 }
- 

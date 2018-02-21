@@ -1,17 +1,17 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Test;
+namespace Lexide\QueueBall\Sqs\Test;
 
 use Aws\Result;
-use PHPUnit\Framework\TestCase;
-use Silktide\QueueBall\Exception\QueueException;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareGroup;
-use Silktide\QueueBall\Sqs\Queue;
+use Lexide\QueueBall\Exception\QueueException;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareGroup;
+use Lexide\QueueBall\Sqs\Queue;
 use Aws\Sqs\SqsClient;
-use Silktide\QueueBall\Message\QueueMessageFactoryInterface;
-use Silktide\QueueBall\Message\QueueMessage;
+use Lexide\QueueBall\Message\QueueMessageFactoryInterface;
+use Lexide\QueueBall\Message\QueueMessage;
 
-class QueueTest extends TestCase {
+class QueueTest extends \PHPUnit_Framework_TestCase
+{
 
     /**
      * @var \Mockery\Mock|SqsClient
@@ -202,4 +202,3 @@ class QueueTest extends TestCase {
     }
 
 }
- 

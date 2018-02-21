@@ -1,11 +1,11 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs;
+namespace Lexide\QueueBall\Sqs;
 
-use Silktide\QueueBall\Exception\QueueException;
-use Silktide\QueueBall\Message\QueueMessageFactoryInterface;
-use Silktide\QueueBall\Message\QueueMessage;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareInterface;
+use Lexide\QueueBall\Exception\QueueException;
+use Lexide\QueueBall\Message\QueueMessageFactoryInterface;
+use Lexide\QueueBall\Message\QueueMessage;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareInterface;
 
 class MessageFactory implements QueueMessageFactoryInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs;
+namespace Lexide\QueueBall\Sqs;
 
 use Aws\Sqs\SqsClient;
-use Silktide\QueueBall\Message\QueueMessage;
-use Silktide\QueueBall\Queue\AbstractQueue;
-use Silktide\QueueBall\Message\QueueMessageFactoryInterface;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareInterface;
+use Lexide\QueueBall\Message\QueueMessage;
+use Lexide\QueueBall\Queue\AbstractQueue;
+use Lexide\QueueBall\Message\QueueMessageFactoryInterface;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareInterface;
 
 /**
  *

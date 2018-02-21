@@ -1,10 +1,10 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Middleware;
+namespace Lexide\QueueBall\Sqs\Middleware;
 
 /**
  * Class MiddlewareGroup
- * @package Silktide\QueueBall\Sqs\Middleware
+ * @package Lexide\QueueBall\Sqs\Middleware
  *
  * In reality, the way we're expecting this to be used is like so:
  *

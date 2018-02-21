@@ -1,18 +1,12 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Test\Middleware;
+namespace Lexide\QueueBall\Sqs\Test\Middleware;
 
-use Aws\Result;
-use Aws\S3\S3Client;
-use GuzzleHttp\Psr7\Stream;
-use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
-use Silktide\QueueBall\Sqs\Middleware\JsonMiddleware;
-use Silktide\QueueBall\Sqs\Middleware\LargeFileMiddleware;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareGroup;
-use Silktide\QueueBall\Sqs\Middleware\MiddlewareInterface;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareGroup;
+use Lexide\QueueBall\Sqs\Middleware\MiddlewareInterface;
+use Mockery\Mock;
 
-class MiddlewareGroupTest extends TestCase
+class MiddlewareGroupTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var MiddlewareGroup
@@ -21,42 +15,33 @@ class MiddlewareGroupTest extends TestCase
 
     public function setUp()
     {
-        // First will add the word foo to the start of a string, and remove it if it's there
-        $first = new class implements MiddlewareInterface {
-
-            public function request($body)
-            {
-                return "foo " . $body;
+        // First will add the word "foo" to the start of a string, and remove it if it's there
+        /** @var MiddlewareInterface|Mock $first */
+        $first = \Mockery::mock("Lexide\\QueueBall\\Sqs\\Middleware\\MiddlewareInterface");
+        $first->shouldReceive("request")->andReturnUsing(function ($body) {
+            return "foo " . $body;
+        });
+        $first->shouldReceive("response")->andReturnUsing(function ($body) {
+            if (strpos($body, "foo ")===0) {
+                return substr($body, 4);
             }
 
-            public function response($body)
-            {
-                if (strpos($body, "foo ")===0) {
-                    return substr($body, 4);
-                }
+            return $body;
+        });
 
-                return $body;
+        // Second will add the word "bar" to the start of a string, and remove it if it's there
+        /** @var MiddlewareInterface|Mock $second */
+        $second = \Mockery::mock("Lexide\\QueueBall\\Sqs\\Middleware\\MiddlewareInterface");
+        $second->shouldReceive("request")->andReturnUsing(function ($body) {
+            return "bar " . $body;
+        });
+        $second->shouldReceive("response")->andReturnUsing(function ($body) {
+            if (strpos($body, "bar ")===0) {
+                return substr($body, 4);
             }
 
-        };
-
-        // First will add the word bar to the start of a string, and remove it if it's there
-        $second = new class implements MiddlewareInterface {
-            public function request($body)
-            {
-                return "bar " . $body;
-            }
-
-            public function response($body)
-            {
-                if (strpos($body, "bar ")===0) {
-                    return substr($body, 4);
-                }
-
-                return $body;
-            }
-
-        };
+            return $body;
+        });
 
         $this->middleware = new MiddlewareGroup([$first, $second]);
     }

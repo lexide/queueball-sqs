@@ -4,9 +4,9 @@ parameters:
     # SQS has a max filesize limit of 256kb, if it's bigger than that, we want to store the file in S3 and fetch it
     # from there instead
     sizeThreshold: 262144
-    storageBucket: cache.silktide.com
-    storageRegion: "us-east-1"
-    storagePrefix: sqs
+    storageBucket: ""
+    storageRegion: ""
+    storagePrefix: ""
 
 services:
     sqsClient:
@@ -17,30 +17,30 @@ services:
                 region: "%sqsRegion%"
 
     messageFactory:
-        class: Silktide\QueueBall\Sqs\MessageFactory
+        class: Lexide\QueueBall\Sqs\MessageFactory
         arguments:
           - "@middlewareGroup"
 
     abstractSqsQueue:
         abstract: true
-        class: Silktide\QueueBall\Sqs\Queue
+        class: Lexide\QueueBall\Sqs\Queue
         arguments:
             - "@sqsClient"
             - "@messageFactory"
             - "@middlewareGroup"
 
     middlewareGroup:
-        class: Silktide\QueueBall\Sqs\Middleware\MiddlewareGroup
+        class: Lexide\QueueBall\Sqs\Middleware\MiddlewareGroup
         arguments:
           -
             - "@jsonMiddleware"
             - "@largeFileMiddleware"
 
     jsonMiddleware:
-        class: Silktide\QueueBall\Sqs\Middleware\JsonMiddleware
+        class: Lexide\QueueBall\Sqs\Middleware\JsonMiddleware
 
     largeFileMiddleware:
-        class: Silktide\QueueBall\Sqs\Middleware\LargeFileMiddleware
+        class: Lexide\QueueBall\Sqs\Middleware\LargeFileMiddleware
         arguments:
           - "@s3Client"
           - "%storageBucket%"
@@ -57,6 +57,6 @@ services:
         extends: "abstractSqsQueue"
 
     # set the sqs queue to be default
-    silktide_queueball.defaultQueue:
+    lexide_queueball.defaultQueue:
         aliasOf: "@sqsQueue"
 

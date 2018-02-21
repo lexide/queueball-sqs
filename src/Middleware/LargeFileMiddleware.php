@@ -1,6 +1,6 @@
 <?php
 
-namespace Silktide\QueueBall\Sqs\Middleware;
+namespace Lexide\QueueBall\Sqs\Middleware;
 
 use Aws\S3\S3Client;
 
@@ -11,7 +11,7 @@ class LargeFileMiddleware implements MiddlewareInterface
     protected $prefix;
     protected $sizeThreshold;
 
-    public function __construct(S3Client $s3Client, string $bucket, string $prefix, int $sizeThreshold)
+    public function __construct(S3Client $s3Client, $bucket, $prefix, $sizeThreshold)
     {
         $this->s3Client = $s3Client;
         $this->bucket = $bucket;
