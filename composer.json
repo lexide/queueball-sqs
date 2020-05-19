@@ -5,24 +5,35 @@
   "homepage": "https://github.com/lexide/queueball-sqs",
   "require": {
     "php": ">=5.5.0",
-    "aws/aws-sdk-php": "3.*",
-    "lexide/queueball": "^3.0.0"
+    "aws/aws-sdk-php": "^3.0.0",
+    "lexide/queueball": "~3.0.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4",
-    "mockery/mockery": "0.9.*",
-    "lexide/pharmacist": "~1.0.0"
+    "phpunit/phpunit": "^4.0.0",
+    "mockery/mockery": "^1.0.0",
+    "lexide/pharmacist": "~1.1.0"
   },
   "autoload": {
     "psr-4": {
-      "Lexide\\QueueBall\\Sqs\\": "src",
+      "Lexide\\QueueBall\\Sqs\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "Lexide\\QueueBall\\Sqs\\Test\\": "test"
     }
   },
   "extra": {
     "lexide/puzzle-di": {
-      "lexide/syringe": {
-        "path": "config/syringe.yml"
+      "files": {
+        "lexide/syringe": {
+          "path": "config/syringe.yml"
+        }
+      },
+      "whitelist": {
+        "lexide/syringe": [
+          "lexide/queueball"
+        ]
       }
     }
   }
