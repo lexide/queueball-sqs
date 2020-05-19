@@ -23,11 +23,39 @@ class MiddlewareGroup implements MiddlewareInterface
      */
     protected $middleware;
 
+    /**
+     * @param MiddlewareInterface[] $middleware
+     */
     public function __construct(array $middleware = [])
     {
-        $this->middleware = $middleware;
+        $this->setMiddleware($middleware);
     }
 
+    /**
+     * @param MiddlewareInterface[] $middleware
+     */
+    public function setMiddleware(array $middleware)
+    {
+        $this->middleware = [];
+        foreach ($middleware as $priority => $ware) {
+            $this->addMiddleware($ware, $priority);
+        }
+    }
+
+    /**
+     * @param MiddlewareInterface $middleware
+     * @param int $priority
+     */
+    public function addMiddleware(MiddlewareInterface $middleware, $priority)
+    {
+        $this->middleware[$priority] = $middleware;
+        ksort($this->middleware);
+    }
+
+    /**
+     * @param string $body
+     * @return mixed
+     */
     public function request($body)
     {
         foreach ($this->middleware as $middleware) {
@@ -37,6 +65,10 @@ class MiddlewareGroup implements MiddlewareInterface
         return $body;
     }
 
+    /**
+     * @param $body
+     * @return mixed
+     */
     public function response($body)
     {
         foreach (array_reverse($this->middleware) as $middleware) {
