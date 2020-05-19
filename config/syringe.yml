@@ -1,7 +1,7 @@
 parameters:
     sqsRegion: ""
 
-    # SQS has a max filesize limit of 256kb, if it's bigger than that, we want to store the file in S3 and fetch it
+    # SQS has a max filesize limit of 256kb. If it's bigger than that, we can store the file in S3 and fetch it
     # from there instead
     sizeThreshold: 262144
     storageBucket: ""
@@ -32,13 +32,14 @@ services:
     middlewareGroup:
         class: Lexide\QueueBall\Sqs\Middleware\MiddlewareGroup
         arguments:
-          -
-            - "@jsonMiddleware"
-            - "@largeFileMiddleware"
+          - "#queueball-sqs.middleware"
 
     jsonMiddleware:
         class: Lexide\QueueBall\Sqs\Middleware\JsonMiddleware
+        tags:
+          queueball-sqs.middleware: 100
 
+    # This isn't enabled by default, it needs to be added to the middleware group, after the jsonMiddleware, to be activated
     largeFileMiddleware:
         class: Lexide\QueueBall\Sqs\Middleware\LargeFileMiddleware
         arguments:
